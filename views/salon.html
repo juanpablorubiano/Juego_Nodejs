@@ -4,23 +4,30 @@
 	<link rel="stylesheet" type="text/css" href="/stylesheet/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="/stylesheet/style.css">
 	<title>Lobby</title>
-	<script type="text/javascript" src="/socket/socket.io.js"></script>
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
 	<script type="text/javascript">
+	var socket = io();
 	function comprobarusuario() {
 		if(document.cookie.indexOf("usuariopong") != -1)
 		{
 			document.body.style.display = "inherit";
-//<tr><td>filosofia</td><td><button class="btn btn-link">invitar</button></td>
-
 		} else
 		{
 			document.body.style.display = "none";
 		}
 	}
+	socket.emit("peticion")
+	socket.on("info", function (info) {
+				var tabla = document.getElementById('tablajugadores');
+				var usuario = info.toString().split(",")
+				for (var i = 0; i < usuario.length; i++) {
+					tabla.innerHTML += "<tr><td>" + usuario[i] + "</td><td><button class=\"btn btn-link\">invitar</button></td>"
+				};
+})
 	</script>
 </head>
 <body onload="comprobarusuario()">
-	<table class="table-bordered table  table-condensed centrado">
+	<table class="table-bordered table table-hover  table-condensed centrado" id="tablajugadores">
 		<tr class="danger"><td>jugadores</td><td>invitar</td>	
 	</table>
 </body>

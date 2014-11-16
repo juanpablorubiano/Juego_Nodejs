@@ -6,7 +6,12 @@ var app = require('express')(),
 
 app.use('/', routes.router);
 
-io.on('connection', function(socket){});
+io.on('connection', function(socket){
+		socket.on("peticion", function() {
+			console.log("enviar")
+			socket.emit("info", agregarusuario.jugadores)
+		})
+});
 
 http.listen(8000, function() {console.log("listo en puerto 8000")});
 
