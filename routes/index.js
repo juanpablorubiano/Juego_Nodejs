@@ -6,13 +6,12 @@ var express = require('express'),
 router.get ('/', function (req, res) {
 	res.sendfile('./views/index.html');
 });
-router.get('/lobby', function (req, res) {
-	res.sendFile("./views/lobby.html")
+router.get ('/salon', function (req, res) {
+	res.sendfile('./views/salon.html');
 });
 router.get ('/juego', function (req, res) {
 	res.sendfile('./views/juego.html');
 });
-
 
 router.get ('/stylesheet/bootstrap.min.css', function (req, res) {
 	res.sendfile('./views/stylesheet/bootstrap.min.css');
@@ -29,9 +28,8 @@ router.get ('/javascript/juego.js', function (req, res) {
 router.post("/agregar", function(req, res) {
 	req.setEncoding("utf8");
 	req.addListener("data", function (datos) {
-		agregarusuario.main(datos.substring(7));
+		agregarusuario.main(datos.substring(7), res);
 	})
-	res.redirect("/lobby")
+	res.redirect("/salon")
 })
-
 exports.router = router;

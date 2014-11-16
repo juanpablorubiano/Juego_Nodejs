@@ -1,7 +1,8 @@
 var app = require('express')(),
 	http = require('http').Server(app),
 	io = require('socket.io')(http),
-	routes = require('./routes/index');
+	routes = require('./routes/index'),
+	agregarusuario = require('./Lib/agregarusuario.js');;
 
 app.use('/', routes.router);
 
