@@ -7,10 +7,13 @@
 	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
 	<script type="text/javascript">
 	var socket = io();
+	var usuariohome;
 	function comprobarusuario() {
 		if(document.cookie.indexOf("usuariopong") != -1)
 		{
 			document.body.style.display = "inherit";
+			usuariohome =  document.cookie.substring(12);
+			alert(usuariohome)
 		} else
 		{
 			document.body.style.display = "none";
@@ -19,9 +22,9 @@
 	socket.emit("peticion")
 	socket.on("info", function (info) {
 				var tabla = document.getElementById('tablajugadores');
-				var usuario = info.toString().split(",")
-				for (var i = 0; i < usuario.length; i++) {
-					tabla.innerHTML += "<tr><td>" + usuario[i] + "</td><td><button class=\"btn btn-link\">invitar</button></td>"
+				var usuarios = info.toString().split(",")
+				for (var i = 0; i < usuarios.length; i++) {
+					tabla.innerHTML += "<tr><td>" + usuarios[i] + "</td><td><form action=\"invitar\" method=\"post\"> <input type=\"hidden\" name=\"usuarioinv\" value=\""+ usuarios[i] +"\"><input type=\"hidden\" name=\"usuariohome\" value=\""+ usuariohome +"\"><button class=\"btn btn-link\">invitar</button></form></td>"
 				};
 })
 	</script>

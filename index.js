@@ -8,7 +8,6 @@ app.use('/', routes.router);
 
 io.on('connection', function(socket){
 		socket.on("peticion", function() {
-			console.log("enviar")
 			socket.emit("info", agregarusuario.jugadores)
 		})
 });

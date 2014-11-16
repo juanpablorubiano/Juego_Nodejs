@@ -1,6 +1,6 @@
 var jugadores = new Array();
 var jugador;
-function main (arg, res) {
+function main (arg) {
 		jugadores.push(arg)
 		jugador = arg;
 }

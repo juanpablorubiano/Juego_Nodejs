@@ -1,6 +1,7 @@
 var express = require('express'),
-	router = express.Router()
-	agregarusuario = require('../Lib/agregarusuario.js');
+	router = express.Router(),
+	agregarusuario = require('../Lib/agregarusuario.js'),
+	invitar = require('../Lib/invitar.js');
 
 /* GET home page. */
 router.get ('/', function (req, res) {
@@ -28,8 +29,13 @@ router.get ('/javascript/juego.js', function (req, res) {
 router.post("/agregar", function(req, res) {
 	req.setEncoding("utf8");
 	req.addListener("data", function (datos) {
-		agregarusuario.main(datos.substring(7), res);
+		agregarusuario.main(datos.substring(7));
 	})
 	res.redirect("/salon")
+})
+router.post("/invitar", function (req, res) {
+	req.addListener("data", function (datos) {
+		invitar(datos.toString())
+	})
 })
 exports.router = router;
