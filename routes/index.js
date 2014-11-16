@@ -6,12 +6,13 @@ var express = require('express'),
 router.get ('/', function (req, res) {
 	res.sendfile('./views/index.html');
 });
-router.get ('/juego', function (req, res) {
-	res.sendfile('./views/juego.html');
-});
 router.get('/lobby', function (req, res) {
 	res.sendFile("./views/lobby.html")
 });
+router.get ('/juego', function (req, res) {
+	res.sendfile('./views/juego.html');
+});
+
 
 router.get ('/stylesheet/bootstrap.min.css', function (req, res) {
 	res.sendfile('./views/stylesheet/bootstrap.min.css');

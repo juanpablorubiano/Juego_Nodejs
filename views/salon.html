@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="/stylesheet/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheet/style.css">
+	<title>Lobby</title>
+	<script type="text/javascript" src="/socket/socket.io.js"></script>
+	<script type="text/javascript">
+	function comprobarusuario() {
+		if(document.cookie.indexOf("usuariopong") != -1)
+		{
+			document.body.style.display = "inherit";
+//<tr><td>filosofia</td><td><button class="btn btn-link">invitar</button></td>
+
+		} else
+		{
+			document.body.style.display = "none";
+		}
+	}
+	</script>
+</head>
+<body onload="comprobarusuario()">
+	<table class="table-bordered table  table-condensed centrado">
+		<tr class="danger"><td>jugadores</td><td>invitar</td>	
+	</table>
+</body>
+</html>
