@@ -7,6 +7,7 @@ var express = require('express'),
 router.get ('/', function (req, res) {
 	res.sendfile('./views/index.html');
 });
+
 router.get ('/salon', function (req, res) {
 	res.sendfile('./views/salon.html');
 });

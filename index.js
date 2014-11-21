@@ -1,16 +1,12 @@
 var app = require('express')(),
 	http = require('http').Server(app),
-	io = require('socket.io')(http),
+	io = require("socket.io")(http),
 	routes = require('./routes/index'),
-	agregarusuario = require('./Lib/agregarusuario.js');;
+	invitar = require("./Lib/invitar.js"),
+	iofun = require("./Lib/iofun.js");
 
 app.use('/', routes.router);
-
-io.on('connection', function(socket){
-		socket.on("peticion", function() {
-			socket.emit("info", agregarusuario.jugadores)
-		})
-});
+io.on("connection", function(socket) {iofun(socket)})
 
 http.listen(8000, function() {console.log("listo en puerto 8000")});
 

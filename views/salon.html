@@ -13,25 +13,50 @@
 		{
 			document.body.style.display = "inherit";
 			usuariohome =  document.cookie.substring(12);
-			alert(usuariohome)
-		} else
-		{
-			document.body.style.display = "none";
-		}
+		} else{  document.body.style.display = "none"; };
 	}
-	socket.emit("peticion")
-	socket.on("info", function (info) {
+	function mostrarusuarios(info) {
 				var tabla = document.getElementById('tablajugadores');
 				var usuarios = info.toString().split(",")
 				for (var i = 0; i < usuarios.length; i++) {
-					tabla.innerHTML += "<tr><td>" + usuarios[i] + "</td><td><form action=\"invitar\" method=\"post\"> <input type=\"hidden\" name=\"usuarioinv\" value=\""+ usuarios[i] +"\"><input type=\"hidden\" name=\"usuariohome\" value=\""+ usuariohome +"\"><button class=\"btn btn-link\">invitar</button></form></td>"
+					tabla.innerHTML += "<tr><td>" + usuarios[i] + "</td><td><button class=\"btn btn-link\" id="+usuarios[i]+" onclick=\"invitar(this.id)\">invitar</button></form></td></tr>"
 				};
-})
+	}
+	function invitar(usuario)
+	{
+		var args = {
+			usuario1 : usuariohome,
+			usuario2 : usuario
+		}
+		socket.emit("invitar", args)
+	}
+	var usuarios;
+	function invitacion (args) {
+		if(args.usuario2 = usuariohome)
+		{
+			usuarios = args;
+			document.getElementById("usuario1").innerHTML = args.usuario1
+			document.getElementById("invitacion").style.display = "inherit";
+		};
+	}
+	function denegado() {document.getElementById("invitacion").style.display = "none";}
+	function invitacionAceptada()
+	{
+		socket.emit("invitacionAceptada", usuarios)	
+	}
+	socket.on("invitacion", function(args){invitacion(args)})
+	socket.emit("peticion")
+	socket.on("info", function(args){mostrarusuarios(args)})
 	</script>
 </head>
 <body onload="comprobarusuario()">
+	<div class="col-md-3 bg-info invitacion " id="invitacion">
+		<center>Haz sido invitado por: <span id="usuario1"></span>
+		<button class="btn btn-sm btn-default" onclick="denegado()">Denegar</button> <button class="btn btn-sm btn-default" onclick="invitacionAceptada()">Aceptar</button></center>
+	</div>
 	<table class="table-bordered table table-hover  table-condensed centrado" id="tablajugadores">
 		<tr class="danger"><td>jugadores</td><td>invitar</td>	
 	</table>
+
 </body>
 </html>
