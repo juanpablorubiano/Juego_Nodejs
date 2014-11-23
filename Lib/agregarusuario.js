@@ -1,9 +1,14 @@
 var jugadores = new Array();
-var jugador;
-jugadores[0] = "test";
-function main (arg) {
-		jugadores.push(arg)
-		jugador = arg;
+function main(arg){
+	var bool = true;
+	for (var i = jugadores.length - 1; i >= 0; i--) {
+		if(arg == jugadores[i])
+		{
+			bool = false;
+		}
+	};
+	if (bool) {jugadores.push(arg)};
 }
-exports.main = main
-exports.jugadores = jugadores;
+exports.jugadores = jugadores
+exports.main = main;
+

@@ -1,14 +1,20 @@
-var agregarusuario = require('./agregarusuario.js'),
-	invitar = require('./invitar');
-var main = function  (socket) {
+var agregarusuario = require('./agregarusuario.js');
+var main = function  (socket, io) {
+	socket.on("usuariohome", function(args) {
+		agregarusuario.main(args)
+		io.emit("info", agregarusuario.jugadores)
+	})
 	socket.on("peticion", function() {
-		socket.emit("info", agregarusuario.jugadores)
+		io.emit("info", agregarusuario.jugadores)
 	})
 	socket.on("invitar", function (args) { 
-		socket.emit("invitacion", args)
+		io.emit("invitacion", args)
 	})
 	socket.on("invitacionAceptada", function (usuarios) {
 		console.log("los usuarios son:" + usuarios)
+	})
+	socket.on("has", function (argument) {
+	console.log("argument")
 	})
 }
 

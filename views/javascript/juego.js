@@ -23,7 +23,5 @@ function jugadores()
 	ctx.fillStyle = "#ffffff";
 
 }
-function controles() {
-	
-}
+
 

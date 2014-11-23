@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="/stylesheet/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheet/style.css">
+	<title>Lobby</title>
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript"> 	var usuariohome = "test"</script>
+	<script type="text/javascript" src="/javascript/salon.js"></script>
+</head>
+<body onload="comprobarusuario()">
+	<div class="col-md-3 bg-info invitacion " id="invitacion">
+		<center>Haz sido invitado por: <span id="usuario1"></span><br>
+		<button class="btn btn-sm btn-default" onclick="denegado()">Denegar</button> <button class="btn btn-sm btn-default" onclick="invitacionAceptada()">Aceptar</button></center>
+	</div>
+	<table class="table-bordered table table-hover  table-condensed centrado" id="tablajugadores">
+		<tr class="danger"><td>jugadores</td><td>invitar</td>	
+	</table>
+
+</body>
+</html>
