@@ -8,6 +8,7 @@ function main(arg){
 		}
 	};
 	if (bool) {jugadores.push(arg)};
+	return bool;
 }
 exports.jugadores = jugadores
 exports.main = main;

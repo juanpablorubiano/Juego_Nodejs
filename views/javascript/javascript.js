@@ -1,5 +1,5 @@
 var socket = io();
-var usuarios,usuariohome,jugadores;
+var usuariohome,jugadores,home;
 
 function crearusuario() {
 	usuariohome = $("#nombre").val();
@@ -7,8 +7,8 @@ function crearusuario() {
 	socket.emit("peticion")
 	salon();
 }
+
 function mostrarusuarios(info) {
-	console.log(info)
 	var tabla = $('#tablajugadores');
 	var usuarios = info.toString().split(",")
 	var nuevosElementos = "<tr class=\"danger\"><td>jugadores</td><td>invitar</td>";
@@ -34,10 +34,44 @@ function invitacion (args) {
 		$("#invitacion").css("display", "inherit");
 	};
 }
+function confirmacion(args)
+{
+	if(args.usuario1 == usuariohome)
+	{
+		home = true;
+		juego(); 
+		juegoDibujo();
+	}
+}
+function invitacionAceptada(){
+	home = false;
+	socket.emit("invitacionAceptada", jugadores);
+	juego(); 
+	juegoDibujo();
+}
+function error1() {
+	usuariohome  = "";
+	index();
+	alert("ese usuario ya existe por favor coloque otro nombre")
+}
 function denegado() {$("#invitacion").css("display", "none")}
-function invitacionAceptada(){socket.emit("invitacionAceptada", jugadores);}
+socket.on("error1",function() { error1()})
 socket.on("info", function(args){mostrarusuarios(args)})
 socket.on("invitacion", function(args){invitacion(args)})
+socket.on("invitacionAceptada", function(args){confirmacion(args)})
 
 
 /**** JUEGO ****/
+function enviarDireccion(dir) {
+	socket.emit("direccion",{dir: dir, jugadores: jugadores, home: home})
+}
+function direccionRecibida(args)
+{
+	if(args.home)
+	{
+		moverJugador1(args.dir)
+	} else {
+		moverJugador2(args.dir)
+	}
+}
+socket.on("direccion", function (args) {direccionRecibida(args)})

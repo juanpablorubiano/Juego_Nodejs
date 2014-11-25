@@ -1,8 +1,11 @@
 var agregarusuario = require('./agregarusuario.js');
 var main = function  (socket, io) {
 	socket.on("usuariohome", function(args) {
-		agregarusuario.main(args)
-		io.emit("info", agregarusuario.jugadores)
+		if(agregarusuario.main(args)){
+			io.emit("info", agregarusuario.jugadores)
+		} else {
+			socket.emit("error1")
+		}
 	})
 	socket.on("peticion", function() {
 		io.emit("info", agregarusuario.jugadores)
@@ -10,11 +13,11 @@ var main = function  (socket, io) {
 	socket.on("invitar", function (args) { 
 		io.emit("invitacion", args)
 	})
-	socket.on("invitacionAceptada", function (usuarios) {
-		console.log("los usuarios son:" + usuarios)
+	socket.on("invitacionAceptada", function (jugadores) {
+		io.emit("invitacionAceptada", jugadores)
 	})
-	socket.on("has", function (argument) {
-	console.log("argument")
+	socket.on("direccion",function(args) {
+		io.emit("direccion", args)
 	})
 }
 
