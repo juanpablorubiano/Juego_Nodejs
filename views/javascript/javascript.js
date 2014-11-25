@@ -7,7 +7,9 @@ function crearusuario() {
 	socket.emit("peticion")
 	salon();
 }
-
+function borrarUsuario() {
+	socket.emit("borrarUsuario", usuariohome)
+}
 function mostrarusuarios(info) {
 	var tabla = $('#tablajugadores');
 	var usuarios = info.toString().split(",")
