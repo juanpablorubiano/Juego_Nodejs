@@ -138,5 +138,3 @@ function moverPelota()
 	console.log("pelota Y: " + pelota.y + ", pelota X:" + pelota.x + " \n , jugador1.y" + jugador1.y + ", jugador2.y"+ jugador2.y)
 }
 var timePelota = setInterval(moverPelota, 100);
-
-
