@@ -24,6 +24,8 @@ var main = function  (socket, io) {
 		manejarUsuarios.borrar(arg)
 		io.emit("info", manejarUsuarios.jugadores)
 	})
+	socket.on("empezar", function() {
+		io.emit("empezar")	
+	})
 }
-
 module.exports = main

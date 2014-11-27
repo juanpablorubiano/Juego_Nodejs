@@ -5,16 +5,6 @@ var express = require('express'),
 router.get ('/', function (req, res) {
 	res.sendfile('./views/index.html');
 });
-
-router.get ('/salon', function (req, res) {
-	res.sendfile('./views/salon.html');
-});
-router.get ('/juego', function (req, res) {
-	res.sendfile('./views/juego.html');
-});
-router.get ('/test', function (req, res) {
-	res.sendfile('./views/usuariotest.html');
-});
 router.get ('/stylesheet/bootstrap.min.css', function (req, res) {
 	res.sendfile('./views/stylesheet/bootstrap.min.css');
 });

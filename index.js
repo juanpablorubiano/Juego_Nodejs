@@ -8,4 +8,3 @@ app.use('/', routes);
 io.on("connection", function(socket) {iofun(socket,io)})
 
 http.listen(8000, function() {console.log("listo en puerto 8000  \n PDT: NO OLVIDAR JQUERY")});
-

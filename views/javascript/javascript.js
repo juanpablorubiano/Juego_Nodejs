@@ -1,7 +1,7 @@
 var socket = io();
 var usuariohome,jugadores,home;
 
-function crearusuario() {
+function crearUsuario() {
 	usuariohome = $("#nombre").val();
 	socket.emit("usuariohome",usuariohome)
 	socket.emit("peticion")
@@ -10,7 +10,7 @@ function crearusuario() {
 function borrarUsuario() {
 	socket.emit("borrarUsuario", usuariohome)
 }
-function mostrarusuarios(info) {
+function mostrarUsuarios(info) {
 	var tabla = $('#tablajugadores');
 	var usuarios = info.toString().split(",")
 	var nuevosElementos = "<tr class=\"danger\"><td>jugadores</td><td>invitar</td>";
@@ -58,7 +58,7 @@ function error1() {
 }
 function denegado() {$("#invitacion").css("display", "none")}
 socket.on("error1",function() { error1()})
-socket.on("info", function(args){mostrarusuarios(args)})
+socket.on("info", function(args){mostrarUsuarios(args)})
 socket.on("invitacion", function(args){invitacion(args)})
 socket.on("invitacionAceptada", function(args){confirmacion(args)})
 
@@ -76,4 +76,9 @@ function direccionRecibida(args)
 		moverJugador2(args.dir)
 	}
 }
+function empezar()
+{
+	socket.emit("empezar")
+}
 socket.on("direccion", function (args) {direccionRecibida(args)})
+socket.on("empezar", function (args) {start()})
